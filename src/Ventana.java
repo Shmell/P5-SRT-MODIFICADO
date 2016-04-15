@@ -27,7 +27,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     {
         initComponents();
         setLocation(400, 0) ;
-        setTitle("Round Robin");
+        setTitle("SRT Prioridades");
 
           Creador=new Thread(this);
   
@@ -55,7 +55,8 @@ public void run()
     if(Ventana.entrar==true)
       {   
        entrar=false;
-          
+       
+       
        Collections.sort(indice);
      
        for(int i=0;i<indice.size();i++)
@@ -69,13 +70,12 @@ public void run()
         }   
        }
             entrar=true;
+         
         //mayor=false;
 
         try
           {
-            sleep(2000);
-            
-            
+            sleep(5000); 
           }
         catch (InterruptedException e)
           {
@@ -278,6 +278,39 @@ texto.setText(aux2);
 
 }
 
+
+//////////////////////////////////////////////
+public void imprimeReanudado(int posicion) 
+{
+String pos=Integer.toString(posicion);
+String vieja,nueva,aux,aux2;
+
+if(posicion<=9)
+	  pos="0"+Integer.toString(posicion);
+
+vieja="Proceso "+pos+"\t"+"Listo";
+nueva="Proceso "+pos+"\t"+"En ejecucion";
+
+
+aux=texto.getText();
+aux2=aux.replaceFirst(vieja, nueva);
+
+if(aux.equals(aux2))
+	{
+           
+            
+	 vieja="Proceso "+pos+"\t"+"Bloqueado";
+	 aux2=aux.replaceFirst(vieja, nueva);
+	}
+texto.setText(aux2);
+
+
+ListaProcesos.get(posicion-1).status=2;
+ListaProcesos.get(posicion-1).resume();
+
+
+}
+
 /////////////////////////////////////////////////
 public String completarEstado(String estado)
 {
@@ -347,6 +380,11 @@ nueva="Proceso "+pos+"\t"+"Bloqueado";
 aux=texto.getText().replaceFirst(vieja, nueva);
 
 texto.setText(aux);
+
+ListaProcesos.get(posicion-1).status=3;
+ListaProcesos.get(posicion-1).suspend();
+
+
 }
  
 //////////////////////////////////////////////////
@@ -568,7 +606,7 @@ texto.setText(aux2);
         
         
         
-        imprimeEjecucion(Integer.parseInt(txtNumero.getText()));
+        imprimeReanudado(Integer.parseInt(txtNumero.getText()));
        txtNumero.setText("");				        
 
     }//GEN-LAST:event_reanudarActionPerformed

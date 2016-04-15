@@ -18,7 +18,8 @@ public class Automatico extends Thread
 		{
 			if(Ventana.contador==0)
 	  	   	 {   
-                          Ventana.entrar=false;  
+                          Ventana.entrar=false;
+                          
                           
                           Ventana.crea();
                           Ventana.crea();
@@ -31,19 +32,25 @@ public class Automatico extends Thread
                         else
                          {
                           Ventana.entrar=false;  
+                         
+                          
                           Ventana.crea(); 
-                          Ventana.entrar=true;  
+                          
+                          Ventana.entrar=true; 
+                        
+                           
                          }
                             
-
+                           
 			try 
                         {
-		         this.sleep(1500);
+		         this.sleep(4000);
 			} 
                         catch (InterruptedException e) 
                         {
                          e.printStackTrace();
 			}
+                        
 		}
             
             

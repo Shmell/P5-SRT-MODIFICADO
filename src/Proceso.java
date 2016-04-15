@@ -78,6 +78,8 @@ public class Proceso extends Thread implements Comparable<Proceso>
  
 	  vieja="Proceso "+pos+"\t"+"Listo y en espera"+"\t"+prioridad;
 	  nueva="Proceso "+pos+"\t"+"En ejecucion"+"\t"+dura+"\t"+prioridad;
+          
+          status=2;
 	 
 	  while(dura!=-1)
 		 {
@@ -101,10 +103,11 @@ public class Proceso extends Thread implements Comparable<Proceso>
 		  vieja="Proceso "+pos+"\t"+"En ejecucion"+"\t"+(dura+1)+"\t"+prioridad;
 		  nueva="Proceso "+pos+"\t"+"      Finalizado"+"\t\t"+prioridad;
 		  
-		  
 		  aux=Ventana.texto.getText();
 		  aux2=aux.replaceFirst(vieja, nueva);
 		  Ventana.texto.setText(aux2);
+                  
+                  status=4;
 		 }
 	
 	 
